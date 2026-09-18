@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: pdevfigorg2/ops
-          ref: develop
+          ref: feature/helmc-charts
           token: ${{ secrets.OPS_REPO_TOKEN }}
           path: ops
       

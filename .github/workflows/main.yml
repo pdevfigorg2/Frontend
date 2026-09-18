@@ -85,6 +85,6 @@ jobs:
           fi
 
           git commit -m "bot: Update backend image tag to ${{ github.sha }}"
-          git push -u origin develop
+          git push
 
           echo "New image name ${{ needs.build_and_push.outputs.image_name }}" >> $GITHUB_STEP_SUMMARY

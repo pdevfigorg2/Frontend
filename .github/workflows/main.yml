@@ -65,12 +65,12 @@ jobs:
         with:
           version: 0.12.13
       
-      - name: Instal uv tool
-        run: uvx pdev-pj1-yaml-tool
+      # - name: Instal uv tool
+      #   run: uvx pdev-pj1-yaml-tool
       
       - name: Update image tag
         working-directory: ops
-        run: pdev-pj1-yaml-tool --frontend-image-tag-value ${{ github.sha }} --file ./project1/dev_values.yaml
+        run: uvx pdev-pj1-yaml-tool --frontend-image-tag-value ${{ github.sha }} --file ./project1/dev_values.yaml
       
       - name: Comit and push
         working-directory: ops

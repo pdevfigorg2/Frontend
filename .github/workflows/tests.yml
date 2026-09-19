@@ -14,3 +14,19 @@ jobs:
           echo "Actor: $GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
           echo "SHA: $GITHUB_SHA" >> $GITHUB_STEP_SUMMARY
           echo "Branch: $GITHUB_REF_NAME" >> $GITHUB_STEP_SUMMARY
+      - name: checkout
+        uses: actions/checkout@v4
+      - run: | 
+          echo: "$GITHUB_WORKSPACE
+          ls $GITHUB_WORKSPACE
+      - name: save output
+        id: output
+        run: echo "version=0.0.1" >> $GITHUB_OUTPUT
+      - name: print outpu from save output
+        run: echo ${{ steps.output.outputs.version }}
+      - name: set new env value
+        run: echo "version=0.0.1" >> $GITHUB_ENV
+      - name: print env
+        run: echo "version $version"
+      - name: print workflow json
+        run: cat $GITHUB_EVENT_PATH

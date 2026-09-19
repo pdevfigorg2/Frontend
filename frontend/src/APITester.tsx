@@ -49,7 +49,7 @@ export function APITester() {
           Endpoint
         </Label>
         <Input id="endpoint" type="text" name="endpoint" defaultValue="/api/v1/datetime" placeholder="/api/v1/datetime" />
-        <Button type="submit" variant="secondary">
+        <Button type="submit" variant="secondary" className="bg-[#61DBFB]">
           Send
         </Button>
       </form>

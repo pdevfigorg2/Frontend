@@ -1,0 +1,11 @@
+name: Sample test
+on:
+  workflow_dispatch:
+
+jobs:
+  test_echo:
+    runs-on: ubuntu-slim
+    steps:
+      - name: test echo
+        run: echo This is sha ${{ github.sha }} >> $GITHUB_OUTPUT
+  

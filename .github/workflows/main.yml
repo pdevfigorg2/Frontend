@@ -38,9 +38,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: pdevfig/backend-temp:${{ github.sha }}
-          cache-from: type=registry,ref=pdevfig/backend-temp:cache
-          cache-to: type=registry,ref=pdevfig/backend-temp:cache,mode=max
+          tags: pdevfig/frontend-temp:${{ github.sha }}
+          cache-from: type=registry,ref=pdevfig/frontend-temp:cache
+          cache-to: type=registry,ref=pdevfig/frontend-temp:cache,mode=max
       # set image tag value
       - name: Set image tag value
         id: image
@@ -84,7 +84,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "bot: Update backend image tag to ${{ github.sha }}"
+          git commit -m "bot: Update frontend image tag to ${{ github.sha }}"
           git push
 
           echo "New image name ${{ needs.build_and_push.outputs.image_name }}" >> $GITHUB_STEP_SUMMARY

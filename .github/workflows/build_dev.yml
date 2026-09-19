@@ -39,8 +39,8 @@ jobs:
         with:
           push: true
           tags: pdevfig/frontend-temp:${{ github.sha }}
-          cache-from: type=registry,ref=pdevfig/frontend-temp:cache
-          cache-to: type=registry,ref=pdevfig/frontend-temp:cache,mode=max
+          cache-from: type=registry,ref=pdevfig/frontend-temp:devcache
+          cache-to: type=registry,ref=pdevfig/frontend-temp:devcache,mode=max
       # set image tag value
       - name: Set image tag value
         id: image

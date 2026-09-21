@@ -44,7 +44,7 @@ jobs:
 
       # set image tag value
       - name: Set image tag value
-        run: echo "Image name pdevfig/frontend-temp:pr-{{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+        run: echo "Image name pdevfig/frontend-temp:pr-{{ github.event.pull_request.number }}"
 
   # update_helm:
   #   needs: build_and_push

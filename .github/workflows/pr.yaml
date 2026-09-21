@@ -76,7 +76,7 @@ jobs:
       - name: create and place values
         working-directory: ops/project1
         run: |
-          cat > "${FILENAME}"
+          cat > "${FILENAME}" << EOF
           # This file is generated automatically by Github Actions CI/CD
           env: ${PR_ENV}
           frontend: 

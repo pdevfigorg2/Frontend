@@ -74,9 +74,9 @@ jobs:
           echo "PR_ENV=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
       - name: create and place values
-        working-directory: ops
+        working-directory: ops/project1
         run: |
-          cat > "./project1/${FILENAME}"
+          cat > "${FILENAME}"
           # This file is generated automatically by Github Actions CI/CD
           env: ${PR_ENV}
           frontend: 

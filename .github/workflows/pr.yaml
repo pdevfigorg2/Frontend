@@ -71,6 +71,7 @@ jobs:
       - name: create and place values
         working-directory: ops
         run: |
+          ls 
           echo "FILE_NAME=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
           cat << 'EOF' > ./project1/$FILE_NAME.yaml
           # This file is generated automatically by Github Actions CI/CD
@@ -80,7 +81,8 @@ jobs:
               imageName: 
                 tag: pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
           EOF 
-          ls ./project1
+          ls project1
+
       - name: Comit and push
         working-directory: ops
         run: |

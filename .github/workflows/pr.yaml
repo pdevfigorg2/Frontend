@@ -72,7 +72,6 @@ jobs:
         working-directory: ops
         run: |
           echo "FILE_NAME=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          touch "$FILE_NAME.yaml"
           cat << 'EOF' > ./project1/$FILE_NAME.yaml
           # This file is generated automatically by Github Actions CI/CD
           env: $FILE_NAME
@@ -86,7 +85,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "4189882+github-actions[bot]@user.noreply.github.com"
-          git add ./project1/dev_values.yaml
+          git add ./project1/$FILE_NAME.yaml
 
           if git diff --cached --quiet; then
             echo "No changes"

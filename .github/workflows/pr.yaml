@@ -68,14 +68,17 @@ jobs:
       # - name: Update image tag
       #   working-directory: ops
       #   run: uvx pdev-pj1-yaml-tool --frontend-image-tag-value ${{ github.sha }} --file ./project1/dev_values.yaml
+      - name: create env values
+        run: |
+          echo "FILE_NAME=pr-${{ github.event.pull_request.number }}.yaml" >> $GITHUB_ENV
+          echo "PR_ENV=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
       - name: create and place values
         working-directory: ops
         run: |
-          ls 
-          echo "FILE_NAME=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          cat << EOF > ./project1/$FILE_NAME.yaml
+          cat > "./project1/${FILENAME}"
           # This file is generated automatically by Github Actions CI/CD
-          env: $FILE_NAME
+          env: ${PR_ENV}
           frontend: 
             deployment: 
               imageName: 
@@ -88,7 +91,7 @@ jobs:
           ls project1
           git config user.name "github-actions[bot]"
           git config user.email "4189882+github-actions[bot]@user.noreply.github.com"
-          git add ./project1/$FILE_NAME.yaml
+          git add ./project1/${FILE_NAME}
 
           if git diff --cached --quiet; then
             echo "No changes"

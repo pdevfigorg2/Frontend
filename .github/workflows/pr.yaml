@@ -73,7 +73,7 @@ jobs:
         run: |
           ls 
           echo "FILE_NAME=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          cat << 'EOF' > ./project1/$FILE_NAME.yaml
+          cat << EOF > ./project1/$FILE_NAME.yaml
           # This file is generated automatically by Github Actions CI/CD
           env: $FILE_NAME
           frontend: 

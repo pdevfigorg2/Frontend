@@ -77,7 +77,7 @@ jobs:
       
       - name: Update image tag
         working-directory: ops
-        run: uvx pdev-pj1-yaml-tool --frontend-image-tag-value  pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }} --file ./project1/${{ env.FILE_NAME}}.yaml
+        run: uvx pdev-pj1-yaml-tool --frontend-image-tag-value  pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }} --file ./project1/${{ env.FILE_NAME}}
 
       - name: Comit and push
         working-directory: ops

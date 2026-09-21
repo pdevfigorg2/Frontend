@@ -81,11 +81,11 @@ jobs:
               imageName: 
                 tag: pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
           EOF 
-          ls project1
 
       - name: Comit and push
         working-directory: ops
         run: |
+          ls project1
           git config user.name "github-actions[bot]"
           git config user.email "4189882+github-actions[bot]@user.noreply.github.com"
           git add ./project1/$FILE_NAME.yaml

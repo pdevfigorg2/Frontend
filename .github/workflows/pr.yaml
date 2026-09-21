@@ -14,37 +14,37 @@ permissions:
   packages: write
   
 jobs:
-  # build_and_push_pr:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # checkout repo
-  #     - name: Checkout
-  #       uses: actions/checkout@v7.0.1
-  #       with:
-  #         ref: ${{ github.event.pull_request.head.sha }}
+  build_and_push_pr:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout repo
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
-  #     - name: Login to Docker Hub
-  #       uses: docker/login-action@v4
-  #       with:
-  #         username: ${{ vars.DOCKERHUB_USERNAME }}
-  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-  #     # setup docker buildx
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v4
+      # setup docker buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
 
-  #     # build and push
-  #     - name: build and push
-  #       uses: docker/build-push-action@v6
-  #       with:
-  #         push: true
-  #         tags: pdevfig/frontend-temp:pr-${{ github.event.pull_request.number }}
-  #         cache-from: type=registry,ref=pdevfig/frontend-temp:devcache
-  #         cache-to: type=registry,ref=pdevfig/frontend-temp:devcache,mode=max
+      # build and push
+      - name: build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: pdevfig/frontend-temp:pr-${{ github.event.pull_request.number }}--${{ github.event.pull_request.head.sha }}
+          cache-from: type=registry,ref=pdevfig/frontend-temp:devcache
+          cache-to: type=registry,ref=pdevfig/frontend-temp:devcache,mode=max
 
-  #     # set image tag value
-  #     - name: Set image tag value
-  #       run: echo "Image name pdevfig/frontend-temp:pr-${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
+      # set image tag value
+      - name: Set image tag value
+        run: echo "Image name pdevfig/frontend-temp:pr-${{ github.event.pull_request.number }}--${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
 
   update_helm_with_new_pr_file:
     # needs: build_and_push_pr
@@ -58,16 +58,7 @@ jobs:
           ref: learn/rollouts
           token: ${{ secrets.OPS_REPO_TOKEN }}
           path: ops
-      
-      # # setup uv
-      # - name: Setup uv
-      #   uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
-      #   with:
-      #     version: 0.12.13
-      
-      # - name: Update image tag
-      #   working-directory: ops
-      #   run: uvx pdev-pj1-yaml-tool --frontend-image-tag-value ${{ github.sha }} --file ./project1/dev_values.yaml
+     
       - name: create env values
         run: |
           echo "FILE_NAME=pr-${{ github.event.pull_request.number }}.yaml" >> $GITHUB_ENV

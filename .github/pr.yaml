@@ -14,7 +14,7 @@ permissions:
   packages: write
   
 jobs:
-  build_and_push:
+  build_and_push-pr:
     runs-on: ubuntu-latest
     steps:
       # checkout repo
@@ -44,7 +44,7 @@ jobs:
 
       # set image tag value
       - name: Set image tag value
-        run: echo "Image name pdevfig/frontend-temp:pr-{{ github.event.pull_request.number }}"
+        run: echo "Image name pdevfig/frontend-temp:pr-{{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
 
   # update_helm:
   #   needs: build_and_push

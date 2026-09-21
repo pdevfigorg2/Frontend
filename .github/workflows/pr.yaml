@@ -47,7 +47,7 @@ jobs:
         run: echo "Image name pdevfig/frontend-temp:pr-${{ github.event.pull_request.number }}--${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
 
   update_helm_with_new_pr_file:
-    # needs: build_and_push_pr
+    needs: build_and_push_pr
     runs-on: ubuntu-latest
     steps:
       # checkout helm
@@ -67,7 +67,7 @@ jobs:
       - name: create and place values
         working-directory: ops/project1
         run: |
-          cat << EOF > "${{ env.FILE_NAME }}"
+          cat << 'EOF' > "${{ env.FILE_NAME }}"
           # This file is generated automatically by Github Actions CI/CD
           env: ${{ env.PR_ENV }}
           frontend: 
